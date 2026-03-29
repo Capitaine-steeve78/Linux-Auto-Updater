@@ -1,0 +1,8 @@
+# pycharm ignore
+.idea/*
+
+# git ignore
+.git/*
+
+# python ignore
+.venv/*

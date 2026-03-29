@@ -1,0 +1,12 @@
+[project]
+name = "Linux Auto Update"
+version = "0.0.1"
+description = "Linux Auto Updater is a program who automaticaly update your system at scheduled time."
+requires-python = ">=3.14,<3.14.3"
+
+[project.dependencies]
+# ICI COMME LE REQUIREMENTS.TXT
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
