@@ -36,7 +36,7 @@ Le script est prévu pour être exécuté à intervalles réguliers via `cron`, 
 ## Roadmap
 
 ### Phase 1 : Structure de base
-- Créer le script principal `autoupdatebot.py`
+- Créer le script principal `Linux Auto Updater.py`
 - Définir la structure des logs
 - Implémenter `apt update`, `apt upgrade -y`, `apt autoremove`, `apt clean`
 
