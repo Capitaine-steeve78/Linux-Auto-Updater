@@ -119,4 +119,14 @@ echo "Activating service..."
 sudo systemctl daemon-reload
 sudo systemctl enable --now "${NOM_APP}.timer"
 
+echo "Creating command..."
+sudo ln -s /opt/linux-auto-updater/lau.sh /usr/local/bin/lau
+echo "Command created."
+
 echo "SUCCESS: Installation completed successfully !"
+echo " "
+echo "-----NOTE-----"
+echo "Now you can use 'lau <command>' to use Linux auto Updater."
+echo " "
+echo "thank's for using Linux Auto Updater !"
+echo "--------------"
