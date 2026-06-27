@@ -1,4 +1,7 @@
 import subprocess
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 def run_command(command):
     try:
@@ -18,5 +21,6 @@ def run_command(command):
 
 # Exemple d'utilisation
 if __name__ == "__main__":
-    run_command("sudo apt update && sudo apt upgrade -y")
+    if not run_command("sudo apt update && sudo apt upgrade -y"):
+        logging.error("Failed to install sudo apt update")
     # run_command("sudo apt upgrade -y")
