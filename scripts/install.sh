@@ -43,7 +43,7 @@ installer_paquet() {
 for cmd in git uv; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
     echo "The '$cmd' program isn't installed."
-    read -p "Do you want to install it? (y/n) : " rep
+    read -r -p "Do you want to install it? (y/n) : " rep
 
     if [[ "$rep" != "y" && "$rep" != "Y" && "$rep" != "Yes" && "$rep" != "yes" ]]; then
       echo "ERROR: Installation refused. Linux-Auto-Updater install stopped."
@@ -79,7 +79,7 @@ uv sync || true
 # =========================
 # INTERVALLE SYSTEMD
 # =========================
-read -p "How often should the service run? (in minutes) : " MINUTES
+read -r -p "How often should the service run? (in minutes) : " MINUTES
 
 if ! [[ "$MINUTES" =~ ^[0-9]+$ ]]; then
   echo "ERROR: Invalid Value."
@@ -112,7 +112,7 @@ $SUDO tee "$TIMER_PATH" > /dev/null <<EOF
 Description=Timer $NOM_APP
 
 [Timer]
-OnBootSec=1min
+OnBootSec=1s
 OnUnitActiveSec=${MINUTES}min
 Unit=${NOM_APP}.service
 
