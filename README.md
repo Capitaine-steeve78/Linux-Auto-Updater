@@ -1,3 +1,6 @@
+> [!warning]
+> Linux Auto Updater is in active developpement.
+
 # Linux-Auto-Updater
 Linux Auto Updater is a program who automatically update your system at scheduled time.
 
