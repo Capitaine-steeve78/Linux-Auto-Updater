@@ -26,11 +26,11 @@ installer_paquet() {
   echo "Initializing $PAQUET..."
 
   if command -v apt >/dev/null 2>&1; then
-    sudo apt update && sudo apt install -y "$PAQUET"
+    $SUDO apt update && $SUDO apt install -y "$PAQUET"
   elif command -v dnf >/dev/null 2>&1; then
-    sudo dnf install -y "$PAQUET"
+    $SUDO dnf install -y "$PAQUET"
   elif command -v pacman >/dev/null 2>&1; then
-    sudo pacman -S --noconfirm "$PAQUET"
+    $SUDO pacman -S --noconfirm "$PAQUET"
   else
     echo "ERROR: Unsupported package manager."
     exit 1
@@ -57,7 +57,6 @@ done
 # =========================
 # VERSION DU REPO
 # =========================
-
 VERSION="main"
 
 # =========================
@@ -65,21 +64,22 @@ VERSION="main"
 # =========================
 echo "Cloning repo..."
 
-sudo rm -rf "$DOSSIER_INSTALL"
+$SUDO rm -rf "$DOSSIER_INSTALL"
 
-sudo git clone -b "$VERSION" "$REPO_URL" "$DOSSIER_INSTALL"
-cd "$DOSSIER_INSTALL"
+$SUDO git clone -b "$VERSION" "$REPO_URL" "$DOSSIER_INSTALL"
+
+cd "$DOSSIER_INSTALL" || exit 1
 
 # =========================
-# INSTALLATION UV (si besoin projet)
+# INSTALLATION UV
 # =========================
 echo "Installing dependencies with uv..."
-sudo uv sync || true
+uv sync || true
 
 # =========================
 # INTERVALLE SYSTEMD
 # =========================
-read -p "How often should the service run? (in minutes)" MINUTES
+read -p "How often should the service run? (in minutes) : " MINUTES
 
 if ! [[ "$MINUTES" =~ ^[0-9]+$ ]]; then
   echo "ERROR: Invalid Value."
@@ -94,7 +94,7 @@ TIMER_PATH="/etc/systemd/system/${NOM_APP}.timer"
 
 echo "Creating systemd service..."
 
-sudo tee "$SERVICE_PATH" > /dev/null <<EOF
+$SUDO tee "$SERVICE_PATH" > /dev/null <<EOF
 [Unit]
 Description=Service $NOM_APP
 
@@ -107,7 +107,7 @@ EOF
 # =========================
 # TIMER SYSTEMD
 # =========================
-sudo tee "$TIMER_PATH" > /dev/null <<EOF
+$SUDO tee "$TIMER_PATH" > /dev/null <<EOF
 [Unit]
 Description=Timer $NOM_APP
 
@@ -125,11 +125,12 @@ EOF
 # =========================
 echo "Activating service..."
 
-sudo systemctl daemon-reload
-sudo systemctl enable --now "${NOM_APP}.timer"
+$SUDO systemctl daemon-reload
+$SUDO systemctl enable --now "${NOM_APP}.timer"
 
 echo "Creating command..."
-sudo ln -s /opt/linux-auto-updater/lau.sh /usr/local/bin/lau
+$SUDO ln -sf "$DOSSIER_INSTALL/lau.sh" /usr/local/bin/lau
+
 echo "Command created."
 
 echo "SUCCESS: Installation completed successfully !"
@@ -137,5 +138,5 @@ echo " "
 echo "-----NOTE-----"
 echo "Now you can use 'lau <command>' to use Linux auto Updater."
 echo " "
-echo "thank's for using Linux Auto Updater !"
+echo "thanks for using Linux Auto Updater !"
 echo "--------------"
