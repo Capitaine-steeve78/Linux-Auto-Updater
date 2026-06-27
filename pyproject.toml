@@ -1,5 +1,5 @@
 [project]
-name = "Linux Auto Update"
+name = "Linux-Auto-Updater"
 version = "0.0.1"
 description = "Linux Auto Updater is a program who automaticaly update your system at scheduled time."
 requires-python = ">=3.14,<3.14.3"
