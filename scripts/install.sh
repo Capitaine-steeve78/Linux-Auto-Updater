@@ -101,7 +101,7 @@ Description=Service $NOM_APP
 [Service]
 Type=oneshot
 WorkingDirectory=$DOSSIER_INSTALL
-ExecStart=/usr/bin/env bash $DOSSIER_INSTALL/run.sh
+ExecStart=/usr/bin/env bash $DOSSIER_INSTALL/lau.sh run
 EOF
 
 # =========================
@@ -130,7 +130,6 @@ $SUDO systemctl enable --now "${NOM_APP}.timer"
 
 echo "Creating command..."
 $SUDO ln -sf "$DOSSIER_INSTALL/lau.sh" /usr/local/bin/lau
-source $HOME/.local/bin/env
 
 echo "Command created."
 
