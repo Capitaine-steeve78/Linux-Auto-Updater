@@ -39,7 +39,7 @@ EOF
 
   load_config
 
-  source "$SCRIPT_DIR/lib/systemd.sh"
+  source "$SCRIPT_DIR/scripts/systemd.sh"
   create_systemd "$INTERVAL_MINUTES"
 
   systemctl daemon-reload
