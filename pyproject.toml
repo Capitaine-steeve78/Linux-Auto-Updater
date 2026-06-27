@@ -1,11 +1,12 @@
 [project]
-name = "Linux-Auto-Updater"
+name = "linux-auto-updater"
 version = "0.0.1"
-description = "Linux Auto Updater is a program who automaticaly update your system at scheduled time."
-requires-python = ">=3.14,<3.14.3"
+description = "Linux Auto Updater is a program that automatically updates your system at scheduled times."
+requires-python = ">=3.10"
 
-[project.dependencies]
-# ICI COMME LE REQUIREMENTS.TXT
+dependencies = [
+    # ICI COMME REQUIREMENTS.TXT
+]
 
 [build-system]
 requires = ["setuptools>=61.0"]
