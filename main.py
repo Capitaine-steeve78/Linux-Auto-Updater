@@ -1,6 +1,6 @@
-import subprocess
 import logging
 import os
+import subprocess
 
 logging.basicConfig(level=logging.INFO)
 
@@ -23,6 +23,19 @@ def run_command(command):
         return False
 
 
+def print_and_log(message: str, level: int):
+    print(message)
+    if level == 1:
+        logging.info(message)
+    elif level == 3:
+        logging.error(message)
+    elif level == 2:
+        logging.warning(message)
+    elif level == 4:
+        logging.critical(message)
+    else:
+        logging.debug(message)
+
 # =========================
 # GESTION SUDO AUTOMATIQUE
 # =========================
@@ -36,6 +49,8 @@ def run_sudo_command(command):
 
 # Exemple d'utilisation
 if __name__ == "__main__":
+
+    print_and_log("Updating...", 1)
 
     if not run_sudo_command("sudo apt update && sudo apt upgrade -y"):
         print("ERROR")
