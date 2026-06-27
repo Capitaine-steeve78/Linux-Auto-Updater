@@ -1,6 +1,0 @@
-install_dir: /opt/linux-auto-updater
-interval_minutes: 60
-branch: main
-auto_update_installer: true
-rootless: false
-debug: false
