@@ -58,11 +58,8 @@ echo "Cloning repo..."
 
 sudo rm -rf "$DOSSIER_INSTALL"
 
-sudo git clone "$REPO_URL" "$DOSSIER_INSTALL"
-
+sudo git clone -b "$VERSION" "$REPO_URL" "$DOSSIER_INSTALL"
 cd "$DOSSIER_INSTALL"
-
-sudo git checkout "$VERSION"
 
 # =========================
 # INSTALLATION UV (si besoin projet)
