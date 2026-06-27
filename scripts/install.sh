@@ -133,6 +133,12 @@ $SUDO ln -sf "$DOSSIER_INSTALL/lau.sh" /usr/local/bin/lau
 
 echo "Command created."
 
+
+echo "Setting executable permissions..."
+
+$SUDO chmod +x "$DOSSIER_INSTALL/lau.sh"
+find "$DOSSIER_INSTALL/scripts" -type f -name "*.sh" -exec $SUDO chmod +x {} \;
+
 echo "SUCCESS: Installation completed successfully !"
 echo " "
 echo "-----NOTE-----"
