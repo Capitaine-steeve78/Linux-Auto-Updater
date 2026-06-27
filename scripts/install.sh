@@ -130,6 +130,7 @@ $SUDO systemctl enable --now "${NOM_APP}.timer"
 
 echo "Creating command..."
 $SUDO ln -sf "$DOSSIER_INSTALL/lau.sh" /usr/local/bin/lau
+source $HOME/.local/bin/env
 
 echo "Command created."
 
