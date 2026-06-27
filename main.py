@@ -22,5 +22,7 @@ def run_command(command):
 # Exemple d'utilisation
 if __name__ == "__main__":
     if not run_command("sudo apt update && sudo apt upgrade -y"):
-        logging.error("Failed to install sudo apt update")
+        print("ERROR")
+        # logging.error("Failed to install sudo apt update")
     # run_command("sudo apt upgrade -y")
+    print("OK.")
