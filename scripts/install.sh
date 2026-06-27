@@ -3,6 +3,15 @@
 set -e
 
 # =========================
+# GESTION ROOT / SUDO
+# =========================
+if [ "$EUID" -eq 0 ]; then
+  SUDO=""
+else
+  SUDO="sudo"
+fi
+
+# =========================
 # CONFIG À MODIFIER
 # =========================
 REPO_URL="https://github.com/Capitaine-steeve78/Linux-auto-updater.git"
