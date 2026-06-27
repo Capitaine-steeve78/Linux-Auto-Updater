@@ -57,18 +57,54 @@ done
 # =========================
 # VERSION DU REPO
 # =========================
-VERSION="main"
+echo "From which version can you install the Linux auto updater? choises: latest(recommanded), main(nightly), tag(specific version) : "
+
+
+read -r -p "Version [latest]: " VERSION
+
+# default = latest
+if [ -z "$VERSION" ]; then
+  VERSION="latest"
+fi
+
+# =========================
+# RESOLUTION VERSION
+# =========================
+
+if [ "$VERSION" = "latest" ]; then
+  echo "Fetching latest tag..."
+
+  VERSION=$(git ls-remote --tags --sort="v:refname" "$REPO_URL" \
+    | grep -v '{}' \
+    | tail -n 1 \
+    | sed 's/.*refs\/tags\///')
+
+  if [ -z "$VERSION" ]; then
+    echo "WARNING: no tags found, fallback to main"
+    VERSION="main"
+  fi
+
+elif [ "$VERSION" = "main" ]; then
+  echo "Using unstable branch: main"
+
+else
+  echo "Using specific version/tag: $VERSION"
+fi
 
 # =========================
 # CLONAGE REPO
 # =========================
-echo "Cloning repo..."
+echo "Installing version: $VERSION..."
 
 $SUDO rm -rf "$DOSSIER_INSTALL"
 
-$SUDO git clone -b "$VERSION" "$REPO_URL" "$DOSSIER_INSTALL"
+$SUDO git clone "$REPO_URL" "$DOSSIER_INSTALL"
 
 cd "$DOSSIER_INSTALL" || exit 1
+
+$SUDO git checkout "$VERSION"
+
+echo "L.A.U. $VERSION cloned"
 
 # =========================
 # INSTALLATION UV
@@ -140,9 +176,10 @@ $SUDO chmod +x "$DOSSIER_INSTALL/lau.sh"
 find "$DOSSIER_INSTALL/scripts" -type f -name "*.sh" -exec $SUDO chmod +x {} \;
 
 echo "SUCCESS: Installation completed successfully !"
-echo " "
+echo ""
 echo "-----NOTE-----"
 echo "Now you can use 'lau <command>' to use Linux auto Updater."
-echo " "
+echo ""
+echo ""
 echo "thanks for using Linux Auto Updater !"
 echo "--------------"
