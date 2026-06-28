@@ -12,3 +12,4 @@ Linux Auto Updater is a program who automatically update your system at schedule
 | UV               | V???     |
 | apt              | V???     |
 | Root permissions | required |
+| systemd          | required |
